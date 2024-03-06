@@ -12,6 +12,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>{
 
     Page<Profile> findByLastName(String lastName, Pageable pageable);
 
+    Profile findByUserName(String username);
+
     Page<Profile> findAll(Pageable pageable);
 
 

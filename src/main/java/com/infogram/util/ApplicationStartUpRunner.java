@@ -1,5 +1,8 @@
 package com.infogram.util;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -59,7 +62,10 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         // Create a profile
         Profile profile = new Profile();
         profile.setFirstName("Danilo");
-        profile.setLastName("Silva");
+        profile.setLastName("Marchesani");
+        profile.setUserName(user.getUserName());
+        profile.setBio("I'm a software developer");
+        profile.setBirthday(LocalDateTime.of(1995, 10, 10, 0, 0));
         profile.setUser(user);
         profileRepository.save(profile);
 
@@ -71,6 +77,28 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         post.setUrl("https://www.google.com");
         post.setUser(user);
         postRepository.save(post);
+        // Create a post
+
+        Post post1 = new Post();
+        post1.setTitle("First Post");
+        post1.setDescription("This is the first post");
+        post1.setUrl("https://www.google.com");
+        post1.setUser(user);
+        postRepository.save(post1);
+        // Create a post
+        Post post2 = new Post();
+        post2.setTitle("First Post");
+        post2.setDescription("This is the first post");
+        post2.setUrl("https://www.google.com");
+        post2.setUser(user);
+        postRepository.save(post2);
+        // Create a post
+        Post post3 = new Post();
+        post3.setTitle("First Post");
+        post3.setDescription("This is the first post");
+        post3.setUrl("https://www.google.com");
+        post3.setUser(user);
+        postRepository.save(post3);
 
         // Create a comment
         Comment comment = new Comment();

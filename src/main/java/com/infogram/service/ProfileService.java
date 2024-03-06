@@ -22,6 +22,10 @@ public class ProfileService {
         return profileRepository.findByLastName(lastName, pageable);
     }
 
+    public Profile findByUserName(String username){
+        return profileRepository.findByUserName(username);
+    }
+
     public Page<Profile> findAll(Pageable pageable){
         return profileRepository.findAll(pageable);
     }

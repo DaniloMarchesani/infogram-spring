@@ -2,6 +2,8 @@ package com.infogram.models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -36,6 +38,7 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private KindOfPost kindOfPost;
 
+    @JsonIgnore 
     @ManyToOne
     private User user;
 

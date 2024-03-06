@@ -1,12 +1,14 @@
 package com.infogram.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -33,4 +35,7 @@ public class Profile {
     
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private List<Post> posts;
 }

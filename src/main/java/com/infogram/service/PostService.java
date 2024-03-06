@@ -18,5 +18,9 @@ public class PostService {
     public Page<Post> findByUser(User user, Pageable pageable){
         return postRepository.findByUser(user, pageable);
     }
+
+    public Page<Post> findByProfile(User user, Pageable pageable){
+        return postRepository.findByUser(user, pageable);
+    }
     
 }
