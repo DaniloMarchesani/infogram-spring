@@ -17,4 +17,8 @@ public class CommentService {
     public Page<Comment> findByPost(Post post, Pageable pageable){
         return commentRepository.findByPostId(post.getId(), pageable);
     }
+
+    public void deleteCommentsByPost(Post post) {
+        //TODO finire l'implementazione
+    }
 }

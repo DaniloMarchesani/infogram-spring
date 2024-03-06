@@ -15,9 +15,13 @@ import com.infogram.service.PostService;
 import com.infogram.service.ProfileService;
 import com.infogram.service.UserService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -48,6 +52,12 @@ public class AppController {
         return "System is up and running";
     }
 
+    /* 
+     * This method returns a complete profile with all the posts and comments
+     * of the user with the given username.
+     * @author Danilo M.
+     *
+     */
     @GetMapping("/{username}")
     public ResponseEntity<?> getUser(@PathVariable String username, Pageable pageable) {
         try {
@@ -59,5 +69,17 @@ public class AppController {
             return ResponseEntity.badRequest().body("Profile not found!");
         }
     }
-    
+
+    /* 
+     * Create A method to post a new Post!
+     */
+    /* @PostMapping("/post")
+    public ResponseEntity<?> createPost(@Valid @RequestBody Post post) {
+        try {
+            postService.addPost(post);
+            return ResponseEntity.ok("Post created successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: Post not created!");
+        }
+    } */
 }
