@@ -45,7 +45,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         // Create a user
         User user = new User();
         user.setEmail("danilo@fakemail.com");
-        user.setPassword("123456");
+        user.setPassword("12345678");
         user.setUserName("danilo95");
         userRepository.save(user);
 
@@ -53,7 +53,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         User user2 = new User();
         user2.setEmail("pippo@coldmail.com");
         user2.setUserName("pippo");
-        user2.setPassword("123456");
+        user2.setPassword("12345678");
         userRepository.save(user2);
 
         // Create a profile

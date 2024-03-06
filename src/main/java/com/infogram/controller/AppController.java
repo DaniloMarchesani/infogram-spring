@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/profile")
 public class AppController {
     
     @GetMapping("/all")
     public String getAll() {
         return "public content";
+    }
+
+    @GetMapping("/")
+    public String systemCheck() {
+        return "System is up and running";
     }
     
 }
