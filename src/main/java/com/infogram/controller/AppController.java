@@ -58,7 +58,7 @@ public class AppController {
         return "System is up and running";
     }
 
-    /* 
+    /* EXPLENATION
      * This method returns a complete profile with all the posts and comments
      * of the user with the given username.
      * @author Danilo M.
@@ -79,9 +79,6 @@ public class AppController {
         }
     } 
 
-    /* @PostMapping("/create-profile")
-    public ResponseEntity<?> createProfile(@Valid @RequestBody )
- */
 
     /* 
      * Create A method to post a new Post!

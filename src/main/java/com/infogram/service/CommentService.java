@@ -19,6 +19,6 @@ public class CommentService {
     }
 
     public void deleteCommentsByPost(Post post) {
-        //TODO finire l'implementazione
+        //TODO finire l'implementazione CRUD dei commenti
     }
 }

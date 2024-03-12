@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.infogram.models.Profile;
 import com.infogram.models.User;
 import com.infogram.payload.request.LoginRequest;
 import com.infogram.payload.request.RegistrationRequest;
 import com.infogram.payload.response.JwtResponse;
 import com.infogram.payload.response.MessageResponse;
+import com.infogram.repository.ProfileRepository;
 import com.infogram.repository.UserRepository;
 import com.infogram.security.service.UserDetailsImpl;
 import com.infogram.security.service.jwt.JwtUtils;
@@ -37,6 +39,9 @@ public class AuthController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProfileRepository profileRepository;
     
     @Autowired
     PasswordEncoder encoder;
@@ -53,7 +58,6 @@ public class AuthController {
 
             String token = jwtUtils.generateJwtToken(authentication);
             JwtResponse jwtResponse = new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail());
-            //FIXME problema è nei millisecondi  di jwtExpirationMs provare a cambiare la variabile.
             return ResponseEntity.ok(jwtResponse);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Error: Bad credentials"));
@@ -73,8 +77,12 @@ public class AuthController {
         }
 
         User user = new User(request.getUsername(), request.getEmail(), encoder.encode(request.getPassword()));
+        Profile profile = new Profile(); //impl the creation of an empty profile as the user register to the app.
+        profile.setUser(user);
+        profile.setUserName(user.getUserName());
 
-        userRepository.save(user);
+        userRepository.save(user); //save the user to the database
+        profileRepository.save(profile); //save the profile to the database
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

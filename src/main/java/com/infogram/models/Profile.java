@@ -3,6 +3,8 @@ package com.infogram.models;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class Profile {
     private String bio;
     private String avatarUrl;
     
+    @JsonIgnore
     @ManyToOne
     private User user;
 
