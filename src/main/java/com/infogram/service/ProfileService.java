@@ -1,5 +1,7 @@
 package com.infogram.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -22,7 +24,7 @@ public class ProfileService {
         return profileRepository.findByLastName(lastName, pageable);
     }
 
-    public Profile findByUserName(String username){
+    public Optional<Profile> findByUserName(String username){
         return profileRepository.findByUserName(username);
     }
 
