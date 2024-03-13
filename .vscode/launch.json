@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-InfogramApplication<infogram>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.infogram.InfogramApplication",
+            "projectName": "infogram",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
