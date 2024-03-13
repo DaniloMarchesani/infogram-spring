@@ -16,6 +16,10 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
+    public Profile createProfile(Profile profile){
+        return profileRepository.save(profile);
+    }
+
     public Page<Profile> findByFirstName(String firstName, Pageable pageable){
         return profileRepository.findByFirstName(firstName, pageable);
     }
@@ -30,6 +34,18 @@ public class ProfileService {
 
     public Page<Profile> findAll(Pageable pageable){
         return profileRepository.findAll(pageable);
+    }
+
+    public Optional<Profile> findById(Long id){
+        return profileRepository.findById(id);
+    }
+
+    public Profile updatProfile(Profile profile){
+        return profileRepository.save(profile);
+    }
+
+    public void deleteProfile(Long id){
+        profileRepository.deleteById(id);
     }
 
 }
