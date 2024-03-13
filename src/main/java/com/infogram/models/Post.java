@@ -1,6 +1,9 @@
 package com.infogram.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.Constraint;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
