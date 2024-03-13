@@ -18,7 +18,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>{
 
     Page<Profile> findAll(Pageable pageable);
 
-
+    Optional<Profile> findById(Long id);
     
 }
 
