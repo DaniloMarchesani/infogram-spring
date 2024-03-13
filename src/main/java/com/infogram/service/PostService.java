@@ -41,15 +41,19 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public void deletePost(Post post) {
-        commentService.deleteCommentsByPost(post);
-        postRepository.delete(post);
+    public void deletePost(Long postId) {
+        //commentService.deleteCommentsByPost(post);
+        postRepository.deleteById(postId);
     }
     
     public Post addPost(Post post) {
         if(post == null) {
             return null;
         }
+        return postRepository.save(post);
+    }
+
+    public Post updatePost(@NotNull Post post) {
         return postRepository.save(post);
     }
 }

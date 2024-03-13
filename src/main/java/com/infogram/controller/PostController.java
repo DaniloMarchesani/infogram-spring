@@ -2,7 +2,6 @@ package com.infogram.controller;
 
 import java.util.Optional;
 
-import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infogram.models.Post;
+import com.infogram.service.CommentService;
 import com.infogram.service.PostService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,6 +30,9 @@ public class PostController {
     
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/")
     public String systemCheck() {
@@ -39,6 +44,11 @@ public class PostController {
         return ResponseEntity.ok(postService.getAll(pageable));
     }
 
+    /* 
+     * ROUTE for adding a new post
+     * date: 2024-03-13
+     * author: @DaniloMarchesani
+     */
     @PostMapping("/")
     public ResponseEntity<?> addPost(@Valid @RequestBody Post post) {
 
@@ -53,6 +63,7 @@ public class PostController {
         }
     }
 
+    // METHOD TO GET A POST BY ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getPostById(@Valid @PathVariable long id ) {
         Optional<Post> post = postService.findById(id);
@@ -62,18 +73,51 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Error: Post not found");
     }
 
+    /* 
+     * ROUTE for updating a post
+     * date: 2024-03-13
+     * author: @DaniloMarchesani
+     */
+    @PutMapping("/")
+    public ResponseEntity<?> updatePost(@Valid @RequestBody Post post) {
+        try {
+            Optional<Post> postToUpdate = postService.findById(post.getId());
+            if(!postToUpdate.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Post not found");
+            }
+
+            postToUpdate.get().setTitle(post.getTitle());
+            postToUpdate.get().setUser(post.getUser());
+            postToUpdate.get().setKindOfPost(post.getKindOfPost());
+            postToUpdate.get().setCreatedAt(post.getCreatedAt());
+            postToUpdate.get().setDescription(post.getDescription());
+            postToUpdate.get().setLikes(post.getLikes());
+            postToUpdate.get().setUrl(post.getUrl());
+
+            postService.updatePost(postToUpdate.get()); //saving into the db.
+
+            return ResponseEntity.status(HttpStatus.CREATED).body("Post updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
+
     // METHOD TO DELETE A POST
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePost(@Valid @PathVariable long id) {
         try {
             Optional<Post> post = postService.findById(id);
+
             if(!post.isPresent()) {
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Error: Post not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Post not found");
             }
-            postService.deletePost(post.get());
+            
+            commentService.deleteCommentsByPost(post.get());
+            postService.deletePost(id);
             return ResponseEntity.ok("Post deleted successfully");
+
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
 }
