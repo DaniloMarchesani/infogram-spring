@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.cglib.core.Local;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,6 +37,7 @@ public class Comment {
     @ManyToOne
     private User user;
 
+    //@JsonIgnore
     @ManyToOne
     private Post post;
 
