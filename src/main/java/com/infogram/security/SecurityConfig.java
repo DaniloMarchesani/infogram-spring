@@ -70,6 +70,7 @@ public class SecurityConfig {
         .authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll()
         .requestMatchers("/api/profile/**").permitAll()
         .requestMatchers("/api/post/**").permitAll()
+        .requestMatchers("/api/comment/**").permitAll()
         .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());
