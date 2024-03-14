@@ -63,6 +63,20 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         user2.setPassword("12345678");
         userRepository.save(user2);
 
+        //create a user2
+        User user3 = new User();
+        user3.setEmail("salame@hotmail.com");
+        user3.setUserName("salamino8585");
+        user3.setPassword("12345678");
+        userRepository.save(user3);
+
+        //create a user2
+        User user4 = new User();
+        user4.setEmail("metallica12@gmail.com");
+        user4.setUserName("metallarocronico");
+        user4.setPassword("12345678");
+        userRepository.save(user4);
+
         // Create a profile
         Profile profile = new Profile();
         profile.setFirstName("Danilo");
@@ -82,6 +96,23 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile2.setUser(user2);
         profileRepository.save(profile2);
 
+        Profile profile3 = new Profile();
+        profile3.setFirstName("Paolo");
+        profile3.setLastName("Barbera");
+        profile3.setUserName(user3.getUserName());
+        profile3.setBio("I'm a retard");
+        profile3.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
+        profile3.setUser(user3);
+        profileRepository.save(profile3);
+
+        Profile profile4 = new Profile();
+        profile4.setFirstName("cosimo");
+        profile4.setLastName("curlante");
+        profile4.setUserName(user4.getUserName());
+        profile4.setBio("I'm a UX DESIGNER");
+        profile4.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
+        profile4.setUser(user4);
+        profileRepository.save(profile4);
 
         // Create a post
         Post post = new Post();
@@ -122,6 +153,12 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
 
         //create a relationship between users
         followersService.follow(profile, profile2);
+        followersService.follow(profile, profile3);
+        followersService.follow(profile, profile4);
+
+        followersService.follow(profile2, profile);
+        followersService.follow(profile3, profile);
+        followersService.follow(profile4, profile);
 
         
 }

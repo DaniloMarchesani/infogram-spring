@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Followers {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

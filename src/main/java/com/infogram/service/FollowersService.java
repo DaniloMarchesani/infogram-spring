@@ -17,9 +17,6 @@ public class FollowersService {
     @Autowired
     private FollowersRepository followersRepository;
 
-    public List<Followers> getAllFollowers() {
-        return followersRepository.findAll();
-    }  
 
     //METHOD TO FOLLOW ANOTHER PROFILE
     public Followers follow(Profile follower, Profile following) {
@@ -29,9 +26,8 @@ public class FollowersService {
         return followersRepository.save(newFollower);
     }
 
-
-    public Optional<Followers> getFollowerById(Long id) {
-        return followersRepository.findById(id);
+    public Optional<List<Followers>> getFollowing(Profile profile) {
+        return followersRepository.findByFollowing(profile);
     }
 
     public Followers saveFollower(Followers follower) {
