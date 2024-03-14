@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
-import com.infogram.models.Comment;
 import com.infogram.models.Post;
 import com.infogram.models.User;
 
@@ -22,8 +21,6 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    @Autowired
-    private CommentService commentService;
 
     public Page<Post> getAll(Pageable pageable) {
         return postRepository.findAll(pageable);

@@ -1,11 +1,6 @@
 package com.infogram.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.springframework.cglib.core.Local;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,12 +1,7 @@
 package com.infogram.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
@@ -15,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//TODO add the relationship between the two users
 @Data
 @Entity
 @NoArgsConstructor
