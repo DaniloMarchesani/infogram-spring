@@ -15,6 +15,7 @@ import com.infogram.repository.CommentRepository;
 import com.infogram.repository.PostRepository;
 import com.infogram.repository.ProfileRepository;
 import com.infogram.repository.UserRepository;
+import com.infogram.service.FollowersService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,9 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private FollowersService followersService;
     
     
 
@@ -68,6 +72,15 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile.setBirthday(LocalDateTime.of(1995, 10, 10, 0, 0));
         profile.setUser(user);
         profileRepository.save(profile);
+
+        Profile profile2 = new Profile();
+        profile2.setFirstName("Sivlio");
+        profile2.setLastName("Berlusconi");
+        profile2.setUserName(user2.getUserName());
+        profile2.setBio("I'm a billionair");
+        profile2.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
+        profile2.setUser(user2);
+        profileRepository.save(profile2);
 
 
         // Create a post
@@ -108,7 +121,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         commentRepository.save(comment);
 
         //create a relationship between users
-        
+        followersService.follow(profile, profile2);
 
         
 }

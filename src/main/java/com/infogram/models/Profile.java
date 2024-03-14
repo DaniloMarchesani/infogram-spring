@@ -2,6 +2,7 @@ package com.infogram.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -28,8 +30,11 @@ public class Profile {
     @Setter(value = AccessLevel.NONE)
     private Long id;
     
+    @NotBlank
     private String userName;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
     private LocalDateTime birthday;
     private String bio;
@@ -41,4 +46,10 @@ public class Profile {
 
     @OneToMany
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "following")
+    private Set<Followers> following;
+
+    @OneToMany(mappedBy = "follower") 
+    private Set<Followers> followers;
 }
