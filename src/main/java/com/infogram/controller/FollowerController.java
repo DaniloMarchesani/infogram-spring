@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +17,6 @@ import com.infogram.models.Profile;
 import com.infogram.service.FollowersService;
 import com.infogram.service.ProfileService;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -36,6 +34,15 @@ public class FollowerController {
         return null;
     }
 
+    /* 
+     * EXPLANATION:
+     * This Route returns a list of profiles that follows my profile.
+     * @param id: The id of the profile that I want to get the followers from.
+     * @return ResponseEntity<?>: If the profile is found, it returns a list of followers, otherwise it returns a 404 status code.
+     * date: 15/03/2024
+     * author: Danilo Marchesani
+     *      
+     * */
     @GetMapping("/{id}")
     public ResponseEntity<?> getFollowing(@PathVariable Long id) {
         Optional<Profile> profile = profileService.findById(id);
