@@ -22,6 +22,13 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public void deleteById(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public boolean existsById(Long id){
+        return userRepository.existsById(id);
+    }
     
     
 }

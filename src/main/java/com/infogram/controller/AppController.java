@@ -38,13 +38,7 @@ public class AppController {
     private ProfileService profileService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private PostService postService;
-
-    @Autowired
-    private CommentService commentService;
     
     /* EXPLAINATION
      * These two methods taht are following are jsut for checking the servive if it's working properly.

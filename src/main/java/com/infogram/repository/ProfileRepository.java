@@ -1,6 +1,7 @@
 package com.infogram.repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +17,10 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>{
 
     Optional<Profile> findByUserName(String username);
 
+    Set<Profile> findProfileByUserId(Long id);
+
     Page<Profile> findAll(Pageable pageable);
 
     Optional<Profile> findById(Long id);
     
 }
-
-//TODO finire i file della repository e poi andare avanti.

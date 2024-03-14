@@ -1,6 +1,7 @@
 package com.infogram.service;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +47,10 @@ public class ProfileService {
 
     public void deleteProfile(Long id){
         profileRepository.deleteById(id);
+    }
+
+    public Set<Profile> findProfileByUserId(Long id){
+        return profileRepository.findProfileByUserId(id);
     }
 
 }
