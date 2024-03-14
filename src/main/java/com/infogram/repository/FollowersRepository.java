@@ -14,4 +14,6 @@ public interface FollowersRepository extends JpaRepository<Followers, Long>{
     
     //This method get you back a List of followers that follows a specific profile.
     public Optional<List<Followers>> findByFollowing(Profile profile);
+
+    public Optional<List<Followers>> findByFollower(Profile follower);
 }

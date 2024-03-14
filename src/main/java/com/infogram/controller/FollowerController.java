@@ -43,7 +43,7 @@ public class FollowerController {
      * author: Danilo Marchesani
      *      
      * */
-    @GetMapping("/{id}")
+    @GetMapping("/following/{id}")
     public ResponseEntity<?> getFollowing(@PathVariable Long id) {
         Optional<Profile> profile = profileService.findById(id);
         if (profile.isPresent()) {
@@ -58,6 +58,27 @@ public class FollowerController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found");
             
+        }
+    }
+
+    @GetMapping("/follower/{id}")
+    public ResponseEntity<?> getFollower(@PathVariable Long id) {
+        try {
+            Optional<Profile> profile = profileService.findById(id);
+            if(!profile.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found");
+            }
+            Optional<List<Followers>> followers = followersService.getFollower(profile.get());
+            if(!followers.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No followers found");
+            }
+            if (followers.get().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user doesn't have any followers");
+            }
+            return ResponseEntity.ok(followers.get());
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
 }

@@ -38,6 +38,10 @@ public class FollowersService {
     public Optional<List<Followers>> getFollowing(Profile profile) {
         return followersRepository.findByFollowing(profile);
     }
+    //BUG: hahaha
+    public Optional<List<Followers>> getFollower(Profile follower) {
+        return followersRepository.findByFollower(follower);
+    }
 
     /* 
      * EXPLANATION:

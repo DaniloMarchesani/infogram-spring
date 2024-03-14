@@ -154,11 +154,8 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         //create a relationship between users
         followersService.follow(profile, profile2);
         followersService.follow(profile, profile3);
-        followersService.follow(profile, profile4);
-
-        followersService.follow(profile2, profile);
-        followersService.follow(profile3, profile);
-        followersService.follow(profile4, profile);
+        followersService.follow(profile3, profile4);
+        followersService.follow(profile2, profile4);
 
         
 }
