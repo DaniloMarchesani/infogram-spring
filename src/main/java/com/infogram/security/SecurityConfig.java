@@ -73,6 +73,7 @@ public class SecurityConfig {
         .requestMatchers("/api/comment/**").permitAll()
         .requestMatchers("/api/user/**").permitAll()
         .requestMatchers("/api/follower/**").permitAll()
+        .requestMatchers("/api/file/**").permitAll()
         .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

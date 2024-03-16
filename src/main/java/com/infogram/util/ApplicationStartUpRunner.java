@@ -156,7 +156,6 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         followersService.follow(profile, profile3);
         followersService.follow(profile3, profile4);
         followersService.follow(profile2, profile4);
-
-        
+    
 }
 }
