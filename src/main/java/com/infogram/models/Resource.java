@@ -1,11 +1,17 @@
 package com.infogram.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -24,7 +30,13 @@ public class Resource {
     @Setter(value = AccessLevel.NONE)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private KindOfResource type;
+
     private String url;
+
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    private Profile profile;
 }
