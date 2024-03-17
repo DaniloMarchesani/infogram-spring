@@ -38,7 +38,7 @@ public class FollowersService {
     public Optional<List<Followers>> getFollowing(Profile profile) {
         return followersRepository.findByFollowing(profile);
     }
-    //BUG: hahaha
+
     public Optional<List<Followers>> getFollower(Profile follower) {
         return followersRepository.findByFollower(follower);
     }
@@ -51,12 +51,10 @@ public class FollowersService {
      * 
      * 
      */
-    //FIXME: This method is still in develop
     public Followers saveFollower(Followers follower) {
         return followersRepository.save(follower);
     }
-
-    //FIXME: This method is still in develop
+    
     public void deleteFollower(Long id) {
         followersRepository.deleteById(id);
     }
