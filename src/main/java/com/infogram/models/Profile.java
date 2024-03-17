@@ -32,9 +32,9 @@ public class Profile {
     
     @NotBlank
     private String userName;
-    @NotBlank
+    
     private String firstName;
-    @NotBlank
+    
     private String lastName;
     private LocalDateTime birthday;
     private String bio;

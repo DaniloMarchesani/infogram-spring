@@ -60,7 +60,7 @@ public class AuthController {
             JwtResponse jwtResponse = new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail());
             return ResponseEntity.ok(jwtResponse);
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Error: Bad credentials"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Error: Bad credentials " + e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Error: Internal server error"));
         }
