@@ -27,7 +27,7 @@ import com.infogram.service.UserService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/user")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
 
@@ -40,21 +40,23 @@ public class UserController {
     @Autowired
     private ProfileService profileService;
 
-    /* 
+    /*
      * This method returns a user.
-     *  If the user is not found, it returns a 404 status code.
+     * If the user is not found, it returns a 404 status code.
      * If there is an error, it returns a 500 status code.
      * 12/03/2024
+     * 
      * @param username
+     * 
      * @return ResponseEntity<?>
      * date: 12/03/2024
      * autor: Danilo Marchesani
      */
     @GetMapping("/{username}")
     public ResponseEntity<?> getUser(@PathVariable String username) {
-        try{
+        try {
             Optional<User> user = userService.findByUsername(username);
-            if(!user.isPresent()) {
+            if (!user.isPresent()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
             return ResponseEntity.status(HttpStatus.OK).body(user.get());
@@ -62,15 +64,17 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
-        
+
     }
 
-    /* 
+    /*
      * This method deletes a user.
-     *  If the user is not found, it returns a 404 status code.
+     * If the user is not found, it returns a 404 status code.
      * If there is an error, it returns a 500 status code.
      * 12/03/2024
+     * 
      * @param id
+     * 
      * @return ResponseEntity<?>
      * date: 12/03/2024
      * autor: Danilo Marchesani
@@ -78,16 +82,16 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, Pageable pageable) {
         try {
-            if(!userService.existsById(id)) {
+            if (!userService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
             List<Post> posts = postService.findByUser(userService.findById(id).get(), pageable).getContent();
-            for(Post post : posts) {
+            for (Post post : posts) {
                 commentService.deleteCommentsByPost(post);
                 postService.deletePost(post.getId());
             }
             Set<Profile> profiles = profileService.findProfileByUserId(id);
-            for(Profile profile : profiles) {
+            for (Profile profile : profiles) {
                 profileService.deleteProfile(profile.getId());
             }
             userService.deleteById(id);
@@ -96,6 +100,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
-
 
 }

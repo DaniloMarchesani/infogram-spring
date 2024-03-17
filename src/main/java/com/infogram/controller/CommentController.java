@@ -32,7 +32,7 @@ import com.infogram.service.CommentService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/comment")
 public class CommentController {
-    
+
     @Autowired
     private CommentService commentService;
 
@@ -40,11 +40,14 @@ public class CommentController {
     public String systemCheck() {
         return "Comment Controller is up and running";
     }
-    
-    /* 
+
+    /*
      * This method returns all the comments of a post.
+     * 
      * @param id: the id of the post.
+     * 
      * @param pageable: the pageable object.
+     * 
      * @return ResponseEntity: the response entity with the comments of the post.
      * date: 2024-03-13
      * version: 1.0
@@ -65,9 +68,11 @@ public class CommentController {
         }
     }
 
-    /* 
+    /*
      * This method creates a new comment.
+     * 
      * @param comment: the comment to be created.
+     * 
      * @return ResponseEntity: the response entity with the result of the creation.
      * date: 2024-03-13
      * version: 1.0
@@ -87,10 +92,13 @@ public class CommentController {
         }
     }
 
-    /* 
+    /*
      * This method updates a comment.
+     * 
      * @param id: the id of the comment.
+     * 
      * @param comment: the comment to be updated.
+     * 
      * @return ResponseEntity: the response entity with the result of the update.
      * date: 2024-03-13
      * version: 1.0
@@ -104,7 +112,7 @@ public class CommentController {
             if (!updatedComment.isPresent()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Comment not found!");
             }
-            
+
             updatedComment.get().setText(comment.getText());
             updatedComment.get().setCreatedAt(comment.getCreatedAt());
             updatedComment.get().setLikes(comment.getLikes());
@@ -119,9 +127,11 @@ public class CommentController {
         }
     }
 
-    /* 
+    /*
      * This method deletes all the comments of a post.
+     * 
      * @param id: the id of the post.
+     * 
      * @return ResponseEntity: the response entity with the result of the deletion.
      * date: 2024-03-13
      * version: 1.0
@@ -130,7 +140,7 @@ public class CommentController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCommentsByPost(@PathVariable Long id) {
         try {
-            if(!commentService.existsById(id)) {
+            if (!commentService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Comment not found in thids post!");
             }
             commentService.deleteCommentById(id);

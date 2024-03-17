@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*" , maxAge = 3600)
 @RestController
 @RequestMapping("/api/profile")
 public class AppController {
