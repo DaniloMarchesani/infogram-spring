@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import com.infogram.security.service.UserDetailsServiceImpl;
 import com.infogram.security.service.jwt.AuthEntryPointJwt;
@@ -75,6 +76,16 @@ public class SecurityConfig {
         .requestMatchers("/api/follower/**").permitAll()
         .requestMatchers("/api/file/**").permitAll()
         .anyRequest().authenticated();
+
+        http.cors(cors -> {
+            cors.configurationSource(request -> {
+                CorsConfiguration corsConfig = new CorsConfiguration();
+                corsConfig.addAllowedOrigin("*");
+                corsConfig.addAllowedMethod("*");
+                corsConfig.addAllowedHeader("*");
+                return corsConfig;
+            });
+        });
 
         http.authenticationProvider(authenticationProvider());
 

@@ -1,6 +1,9 @@
 package com.infogram.models;
 
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +30,7 @@ public class User {
 
     private String userName;
     private String email;
+    @JsonIgnore
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

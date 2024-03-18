@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +26,9 @@ import com.infogram.service.PostService;
 import com.infogram.service.ProfileService;
 import com.infogram.service.UserService;
 
+
+@CrossOrigin(maxAge = 3600)
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -39,6 +43,18 @@ public class UserController {
 
     @Autowired
     private ProfileService profileService;
+
+    @GetMapping("/")
+    public ResponseEntity<?> getUser() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            return ResponseEntity.status(HttpStatus.OK).body(userService.findByUsername(currentPrincipalName).get());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+
+    }
 
     /*
      * This method returns a user.
