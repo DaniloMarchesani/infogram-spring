@@ -8,13 +8,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.infogram.errors.PostNotFound;
+import com.infogram.errors.ProfileNotFound;
 import com.infogram.models.KindOfResource;
+import com.infogram.models.Post;
+import com.infogram.models.Profile;
 import com.infogram.models.Resource;
 import com.infogram.repository.ResourceRepository;
 
@@ -24,16 +29,35 @@ public class FileService {
     @Autowired
     private ResourceRepository resourceRepository;
 
-    public static final String UPLOAD_DIR = "uploads";
+    @Autowired
+    private PostService postService;
 
-    public void uploadFile(MultipartFile file) {
+    @Autowired
+    private ProfileService profileService;
+
+    public static final String UPLOAD_DIR = "src/main/java/com/infogram/assets/uploads";
+
+    public void uploadFile(MultipartFile file, String profileUsername, Long postId) throws ProfileNotFound, PostNotFound {
 
         if (!new File(UPLOAD_DIR).exists()) {
             new File(UPLOAD_DIR).mkdir();
         }
+
+        Optional<Post> post = postService.findById(postId);
+        if(!post.isPresent()) {
+            throw new PostNotFound("Post not found or not exist!!");
+        }
+
+        Optional<Profile> profile = profileService.findByUserName(profileUsername);
+        if(!profile.isPresent()) {
+            throw new ProfileNotFound("Profile not found!");
+        }
+
         Resource resource = new Resource();
         resource.setUrl(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         resource.setType(KindOfResource.IMG);
+        resource.setPost(post.get());
+        resource.setProfile(profile.get());
         resource.setCreatedAt(LocalDateTime.now());
         
 

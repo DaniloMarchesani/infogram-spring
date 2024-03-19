@@ -1,9 +1,6 @@
 package com.infogram.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,4 +36,7 @@ public class Resource {
 
     @ManyToOne
     private Profile profile;
+
+    @ManyToOne
+    private Post post;
 }

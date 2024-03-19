@@ -34,7 +34,7 @@ public class PostService {
         return postRepository.findByUser(user, pageable);
     }
 
-    public Optional<Post> findById(long id) {
+    public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }
 

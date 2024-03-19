@@ -47,4 +47,7 @@ public class Post {
     @ManyToOne
     private User user;
 
+    @OneToMany(mappedBy = "post")
+    private List<Resource> resources;
+
 }
