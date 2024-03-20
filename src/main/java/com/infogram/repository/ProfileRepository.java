@@ -15,7 +15,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>{
 
     Page<Profile> findByLastName(String lastName, Pageable pageable);
 
-    Optional<Profile> findByUserName(String username);
+    Optional<Profile> findByUsername(String username);
 
     Set<Profile> findProfileByUserId(Long id);
 

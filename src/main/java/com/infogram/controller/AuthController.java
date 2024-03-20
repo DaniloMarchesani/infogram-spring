@@ -70,7 +70,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) {
 
-        if (userRepository.existsByUserName(request.getUsername())) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse("Error: Username is already taken!"));
         } else if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse("Error: Email is already taken!"));
@@ -79,7 +79,7 @@ public class AuthController {
         User user = new User(request.getUsername(), request.getEmail(), encoder.encode(request.getPassword()));
         Profile profile = new Profile(); //impl the creation of an empty profile as the user register to the app.
         profile.setUser(user);
-        profile.setUserName(user.getUserName());
+        profile.setUsername(user.getUsername());
 
         userRepository.save(user); //save the user to the database
         profileRepository.save(profile); //save the profile to the database

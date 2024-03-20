@@ -28,7 +28,7 @@ public class User {
     @Setter(value = AccessLevel.NONE)
     private Long id;
 
-    private String userName;
+    private String username;
     private String email;
     @JsonIgnore
     private String password;
@@ -37,8 +37,8 @@ public class User {
     private LocalDateTime lastLoginAt;
     private LocalDateTime lastOnlineAt;
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.createdAt = LocalDateTime.now();

@@ -68,7 +68,7 @@ public class AppController {
             if (!profile.isPresent()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found!");
             }
-            profile.get().setPosts(postService.findByProfile(profile.get().getUser(), pageable).getContent());
+            profile.get().setPosts(postService.findByProfile(profile.get(), pageable).getContent());
             return ResponseEntity.ok(profile);
 
         } catch (Exception e) {
@@ -87,12 +87,12 @@ public class AppController {
     public ResponseEntity<?> createProfile(@RequestBody Profile profile) {
 
         try {
-            Optional<Profile> existingProfile = profileService.findByUserName(profile.getUserName());
+            Optional<Profile> existingProfile = profileService.findByUserName(profile.getUsername());
             if(existingProfile.isPresent()) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists!");
             }
             profileService.createProfile(profile);
-            return ResponseEntity.ok().body("Profile created!" + profile.getUserName());
+            return ResponseEntity.ok().body("Profile created!" + profile.getUsername());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("internal server error: " + e.getMessage());
         }
@@ -114,7 +114,7 @@ public class AppController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found!");
             }
 
-            profileToUpdate.get().setUserName(profile.getUserName());
+            profileToUpdate.get().setUsername(profile.getUsername());
             profileToUpdate.get().setFirstName(profile.getFirstName());
             profileToUpdate.get().setLastName(profile.getLastName());
             profileToUpdate.get().setBio(profile.getBio());
@@ -123,7 +123,7 @@ public class AppController {
 
             profileService.updatProfile(profileToUpdate.get());
 
-            return ResponseEntity.ok("Profile updated! " + profileToUpdate.get().getUserName());
+            return ResponseEntity.ok("Profile updated! " + profileToUpdate.get().getUsername());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "internal server error: " + e.getMessage());
         }
@@ -144,7 +144,7 @@ public class AppController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found!");
             }
             profileService.deleteProfile(id);
-            return ResponseEntity.ok("Profile deleted!" + profile.get().getUserName());
+            return ResponseEntity.ok("Profile deleted!" + profile.get().getUsername());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("internal server error: " + e.getMessage());
         }

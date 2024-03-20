@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.infogram.errors.ProfileNotFound;
 import com.infogram.models.Post;
 import com.infogram.service.CommentService;
+import com.infogram.service.ContentService;
 import com.infogram.service.PostService;
 
 import jakarta.validation.Valid;
@@ -33,6 +35,9 @@ public class PostController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private ContentService  contentService;
 
     @GetMapping("/")
     public String systemCheck() {
@@ -65,12 +70,31 @@ public class PostController {
 
     // METHOD TO GET A POST BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPostById(@Valid @PathVariable long id ) {
-        Optional<Post> post = postService.findById(id);
+    public ResponseEntity<?> getPostById(@Valid @PathVariable Long id ) throws ProfileNotFound, Exception{
+        /* Optional<Post> post = postService.findById(id);
         if(post.isPresent()) {
             return ResponseEntity.ok(post.get());
+        } */
+        try {
+
+            Optional<Post> post = contentService.getPostById(id);
+            return ResponseEntity.ok(post.get());
+
+        } catch (ProfileNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Error: Post not found");
+    }
+
+    @GetMapping("/all/{id}")
+    public ResponseEntity<?> getAllUserPosts(@Valid @PathVariable long id, Pageable pageable) throws ProfileNotFound {
+        try {
+            return ResponseEntity.ok(contentService.getAllProfilePosts(id, pageable));
+        } catch (ProfileNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
+        }
+
     }
 
     /* 
@@ -87,7 +111,7 @@ public class PostController {
             }
 
             postToUpdate.get().setTitle(post.getTitle());
-            postToUpdate.get().setUser(post.getUser());
+            postToUpdate.get().setProfile(post.getProfile());
             postToUpdate.get().setKindOfPost(post.getKindOfPost());
             postToUpdate.get().setCreatedAt(post.getCreatedAt());
             postToUpdate.get().setDescription(post.getDescription());

@@ -45,7 +45,7 @@ public class Post {
 
     @JsonIgnore 
     @ManyToOne
-    private User user;
+    private Profile profile;
 
     @OneToMany(mappedBy = "post")
     private List<Resource> resources;

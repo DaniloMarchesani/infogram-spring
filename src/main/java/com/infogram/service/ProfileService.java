@@ -30,7 +30,7 @@ public class ProfileService {
     }
 
     public Optional<Profile> findByUserName(String username){
-        return profileRepository.findByUserName(username);
+        return profileRepository.findByUsername(username);
     }
 
     public Page<Profile> findAll(Pageable pageable){

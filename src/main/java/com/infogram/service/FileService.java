@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class FileService {
     private ProfileService profileService;
 
     public static final String UPLOAD_DIR = "src/main/java/com/infogram/assets/uploads";
+
+    public List<Resource> findResourcesByPostId(Long postId) {
+        return resourceRepository.findResourceByPostId(postId);
+    }
 
     public void uploadFile(MultipartFile file, String profileUsername, Long postId) throws ProfileNotFound, PostNotFound {
 

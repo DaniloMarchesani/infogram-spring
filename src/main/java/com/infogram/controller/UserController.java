@@ -101,11 +101,11 @@ public class UserController {
             if (!userService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
-            List<Post> posts = postService.findByUser(userService.findById(id).get(), pageable).getContent();
+            /* List<Post> posts = postService.findByUser(userService.findById(id).get(), pageable).getContent();
             for (Post post : posts) {
                 commentService.deleteCommentsByPost(post);
                 postService.deletePost(post.getId());
-            }
+            } */
             Set<Profile> profiles = profileService.findProfileByUserId(id);
             for (Profile profile : profiles) {
                 profileService.deleteProfile(profile.getId());

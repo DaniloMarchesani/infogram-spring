@@ -31,7 +31,7 @@ public class Profile {
     private Long id;
     
     @NotBlank
-    private String userName;
+    private String username;
     
     private String firstName;
     
@@ -44,7 +44,7 @@ public class Profile {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "profile")
     private List<Post> posts;
 
     @OneToMany(mappedBy = "following")

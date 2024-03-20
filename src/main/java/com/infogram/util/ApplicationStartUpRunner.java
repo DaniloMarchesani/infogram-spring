@@ -53,27 +53,27 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         User user = new User();
         user.setEmail("danilo@fakemail.com");
         user.setPassword("12345678");
-        user.setUserName("danilo95");
+        user.setUsername("danilo95");
         userRepository.save(user);
 
         //create a user2
         User user2 = new User();
         user2.setEmail("pippo@coldmail.com");
-        user2.setUserName("pippo");
+        user2.setUsername("pippo");
         user2.setPassword("12345678");
         userRepository.save(user2);
 
         //create a user2
         User user3 = new User();
         user3.setEmail("salame@hotmail.com");
-        user3.setUserName("salamino8585");
+        user3.setUsername("salamino8585");
         user3.setPassword("12345678");
         userRepository.save(user3);
 
         //create a user2
         User user4 = new User();
         user4.setEmail("metallica12@gmail.com");
-        user4.setUserName("metallarocronico");
+        user4.setUsername("metallarocronico");
         user4.setPassword("12345678");
         userRepository.save(user4);
 
@@ -81,7 +81,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         Profile profile = new Profile();
         profile.setFirstName("Danilo");
         profile.setLastName("Marchesani");
-        profile.setUserName(user.getUserName());
+        profile.setUsername(user.getUsername());
         profile.setBio("I'm a software developer");
         profile.setBirthday(LocalDateTime.of(1995, 10, 10, 0, 0));
         profile.setUser(user);
@@ -90,7 +90,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         Profile profile2 = new Profile();
         profile2.setFirstName("Sivlio");
         profile2.setLastName("Berlusconi");
-        profile2.setUserName(user2.getUserName());
+        profile2.setUsername(user2.getUsername());
         profile2.setBio("I'm a billionair");
         profile2.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile2.setUser(user2);
@@ -99,7 +99,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         Profile profile3 = new Profile();
         profile3.setFirstName("Paolo");
         profile3.setLastName("Barbera");
-        profile3.setUserName(user3.getUserName());
+        profile3.setUsername(user3.getUsername());
         profile3.setBio("I'm a retard");
         profile3.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile3.setUser(user3);
@@ -108,7 +108,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         Profile profile4 = new Profile();
         profile4.setFirstName("cosimo");
         profile4.setLastName("curlante");
-        profile4.setUserName(user4.getUserName());
+        profile4.setUsername(user4.getUsername());
         profile4.setBio("I'm a UX DESIGNER");
         profile4.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile4.setUser(user4);
@@ -119,30 +119,26 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         post.setTitle("First Post");
         post.setDescription("This is the first post");
         post.setUrl("https://www.google.com");
-        post.setUser(user);
+        post.setProfile(profile);
         postRepository.save(post);
         // Create a post
 
-        Post post1 = new Post();
-        post1.setTitle("First Post");
-        post1.setDescription("This is the first post");
-        post1.setUrl("https://www.google.com");
-        post1.setUser(user);
-        postRepository.save(post1);
         // Create a post
         Post post2 = new Post();
         post2.setTitle("First Post");
         post2.setDescription("This is the first post");
         post2.setUrl("https://www.google.com");
-        post2.setUser(user);
+        post2.setProfile(profile);
         postRepository.save(post2);
+
         // Create a post
         Post post3 = new Post();
         post3.setTitle("First Post");
         post3.setDescription("This is the first post");
         post3.setUrl("https://www.google.com");
-        post3.setUser(user);
+        post3.setProfile(profile);
         postRepository.save(post3);
+
 
         // Create a comment
         Comment comment = new Comment();
