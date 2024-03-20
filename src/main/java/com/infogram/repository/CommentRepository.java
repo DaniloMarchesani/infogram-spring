@@ -11,6 +11,5 @@ import com.infogram.models.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Long>{
     Optional<Page<Comment>> findByPostId(Long postId, Pageable pageable);
 
-    Page<Comment> findByUserId(Long userId, Pageable pageable);
 
 }

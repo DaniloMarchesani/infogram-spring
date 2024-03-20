@@ -116,7 +116,6 @@ public class CommentController {
             updatedComment.get().setText(comment.getText());
             updatedComment.get().setCreatedAt(comment.getCreatedAt());
             updatedComment.get().setLikes(comment.getLikes());
-            updatedComment.get().setUser(comment.getUser());
             updatedComment.get().setPost(comment.getPost());
 
             commentService.saveComment(updatedComment.get());

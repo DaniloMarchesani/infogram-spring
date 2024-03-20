@@ -2,6 +2,8 @@ package com.infogram.models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,9 +36,7 @@ public class Resource {
 
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    private Profile profile;
-
+    @JsonIgnore
     @ManyToOne
     private Post post;
 }

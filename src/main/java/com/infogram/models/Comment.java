@@ -29,8 +29,8 @@ public class Comment {
     private int likes;
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    private User user;
+    /* @ManyToOne
+    private User user; */
 
     //@JsonIgnore
     @ManyToOne

@@ -143,7 +143,6 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         // Create a comment
         Comment comment = new Comment();
         comment.setPost(post);
-        comment.setUser(user);
         comment.setText("This is the first comment");
         commentRepository.save(comment);
 

@@ -36,7 +36,7 @@ public class FileService {
     @Autowired
     private ProfileService profileService;
 
-    public static final String UPLOAD_DIR = "src/main/java/com/infogram/assets/uploads";
+    public static final String UPLOAD_DIR = "uploads";
 
     public List<Resource> findResourcesByPostId(Long postId) {
         return resourceRepository.findResourceByPostId(postId);
@@ -62,7 +62,6 @@ public class FileService {
         resource.setUrl(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         resource.setType(KindOfResource.IMG);
         resource.setPost(post.get());
-        resource.setProfile(profile.get());
         resource.setCreatedAt(LocalDateTime.now());
         
 
