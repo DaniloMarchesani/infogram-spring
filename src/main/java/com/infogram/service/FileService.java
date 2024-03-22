@@ -42,19 +42,20 @@ public class FileService {
         return resourceRepository.findResourceByPostId(postId);
     }
 
-    public void uploadFile(MultipartFile file, String profileUsername, Long postId) throws ProfileNotFound, PostNotFound {
+    public void uploadFile(MultipartFile file, String profileUsername, Long postId)
+            throws ProfileNotFound, PostNotFound {
 
         if (!new File(UPLOAD_DIR).exists()) {
             new File(UPLOAD_DIR).mkdir();
         }
 
         Optional<Post> post = postService.findById(postId);
-        if(!post.isPresent()) {
+        if (!post.isPresent()) {
             throw new PostNotFound("Post not found or not exist!!");
         }
 
         Optional<Profile> profile = profileService.findByUserName(profileUsername);
-        if(!profile.isPresent()) {
+        if (!profile.isPresent()) {
             throw new ProfileNotFound("Profile not found!");
         }
 
@@ -63,7 +64,6 @@ public class FileService {
         resource.setType(KindOfResource.IMG);
         resource.setPost(post.get());
         resource.setCreatedAt(LocalDateTime.now());
-        
 
         try {
             resourceRepository.save(resource);
@@ -75,4 +75,32 @@ public class FileService {
         }
     }
 
+    // test
+    public void uploadAvatar(MultipartFile file, String profileUsername) throws ProfileNotFound {
+        if (!new File(UPLOAD_DIR).exists()) {
+            new File(UPLOAD_DIR).mkdir();
+        }
+
+        Optional<Profile> profile = profileService.findByUserName(profileUsername);
+        if (!profile.isPresent()) {
+            throw new ProfileNotFound("Profile not found!");
+        }
+
+        Resource resource = new Resource();
+        resource.setUrl(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+        resource.setType(KindOfResource.IMG);
+        resource.setCreatedAt(LocalDateTime.now());
+
+        try {
+            resourceRepository.save(resource);
+            profile.get().setAvatarUrl(profileUsername + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+            Path copyLocation = Paths
+                    .get(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+    }
 }

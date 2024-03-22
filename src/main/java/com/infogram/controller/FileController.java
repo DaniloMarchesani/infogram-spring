@@ -52,5 +52,24 @@ public class FileController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not upload the file: " + file.getOriginalFilename() + "!");
         }
     }
+
+    //TEST-UPLOAD AVATAR
+    @PostMapping(path = "/upload/avatar", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> uploadAvatar(@RequestParam("file") MultipartFile file, @RequestParam("profile") String username) throws ProfileNotFound {
+        if(file.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please select a file to upload");
+        }
+
+        try {
+            fileService.uploadAvatar(file, username);
+            return ResponseEntity.status(HttpStatus.OK).body("File uploaded successfully");
+        }
+        catch (ProfileNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not upload the file: " + file.getOriginalFilename() + "!");
+        }
+    }
     
 }
