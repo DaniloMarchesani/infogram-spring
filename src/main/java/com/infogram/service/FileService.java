@@ -90,10 +90,11 @@ public class FileService {
         resource.setUrl(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         resource.setType(KindOfResource.IMG);
         resource.setCreatedAt(LocalDateTime.now());
+        profile.get().setAvatarUrl(resource.getUrl());
 
         try {
             resourceRepository.save(resource);
-            profile.get().setAvatarUrl(profileUsername + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+            //profile.get().setAvatarUrl(profileUsername + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
             Path copyLocation = Paths
                     .get(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
