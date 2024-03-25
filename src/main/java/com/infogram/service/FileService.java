@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +37,8 @@ public class FileService {
     @Autowired
     private ProfileService profileService;
 
-    public static final String UPLOAD_DIR = "uploads";
+    @Value("${file.upload-dir}")
+    private String UPLOAD_DIR;
 
     public List<Resource> findResourcesByPostId(Long postId) {
         return resourceRepository.findResourceByPostId(postId);
@@ -87,7 +89,7 @@ public class FileService {
         }
 
         Resource resource = new Resource();
-        resource.setUrl(UPLOAD_DIR + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+        resource.setUrl(/* UPLOAD_DIR +  */File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         resource.setType(KindOfResource.IMG);
         resource.setCreatedAt(LocalDateTime.now());
         profile.get().setAvatarUrl(resource.getUrl());
