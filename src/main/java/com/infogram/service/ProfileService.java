@@ -1,5 +1,6 @@
 package com.infogram.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,7 +19,14 @@ public class ProfileService {
     private ProfileRepository profileRepository;
 
     public Profile createProfile(Profile profile){
-        return profileRepository.save(profile);
+        Profile newProfile = new Profile();
+        newProfile.setFirstName(profile.getFirstName());
+        newProfile.setLastName(profile.getLastName());
+        newProfile.setUsername(profile.getUsername());
+        LocalDateTime birth = LocalDateTime.from(profile.getBirthday());
+        newProfile.setBirthday(birth);
+        newProfile.setBio(profile.getBio());
+        return profileRepository.save(newProfile);
     }
 
     public Page<Profile> findByFirstName(String firstName, Pageable pageable){
