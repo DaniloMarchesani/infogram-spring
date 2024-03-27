@@ -19,14 +19,14 @@ public class ProfileService {
     private ProfileRepository profileRepository;
 
     public Profile createProfile(Profile profile){
-        Profile newProfile = new Profile();
+        /* Profile newProfile = new Profile();
         newProfile.setFirstName(profile.getFirstName());
         newProfile.setLastName(profile.getLastName());
         newProfile.setUsername(profile.getUsername());
         LocalDateTime birth = LocalDateTime.from(profile.getBirthday());
         newProfile.setBirthday(birth);
-        newProfile.setBio(profile.getBio());
-        return profileRepository.save(newProfile);
+        newProfile.setBio(profile.getBio()); */
+        return profileRepository.save(profile);
     }
 
     public Page<Profile> findByFirstName(String firstName, Pageable pageable){
