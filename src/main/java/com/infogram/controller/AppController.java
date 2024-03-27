@@ -118,7 +118,6 @@ public class AppController {
             profileToUpdate.get().setFirstName(profile.getFirstName());
             profileToUpdate.get().setLastName(profile.getLastName());
             profileToUpdate.get().setBio(profile.getBio());
-            profileToUpdate.get().setAvatarUrl(profile.getAvatarUrl());
             profileToUpdate.get().setBirthday(profile.getBirthday());
 
             profileService.updatProfile(profileToUpdate.get());

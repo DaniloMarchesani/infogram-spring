@@ -1,6 +1,6 @@
 package com.infogram.models;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +36,7 @@ public class Profile {
     private String firstName;
     
     private String lastName;
-    private LocalDateTime birthday;
+    private Timestamp birthday;
     private String bio;
     private String avatarUrl;
     

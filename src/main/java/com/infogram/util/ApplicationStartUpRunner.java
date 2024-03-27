@@ -1,8 +1,5 @@
 package com.infogram.util;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -83,7 +80,7 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile.setLastName("Marchesani");
         profile.setUsername(user.getUsername());
         profile.setBio("I'm a software developer");
-        profile.setBirthday(LocalDateTime.of(1995, 10, 10, 0, 0));
+
         profile.setUser(user);
         profileRepository.save(profile);
 
@@ -92,7 +89,6 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile2.setLastName("Berlusconi");
         profile2.setUsername(user2.getUsername());
         profile2.setBio("I'm a billionair");
-        profile2.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile2.setUser(user2);
         profileRepository.save(profile2);
 
@@ -101,7 +97,6 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile3.setLastName("Barbera");
         profile3.setUsername(user3.getUsername());
         profile3.setBio("I'm a retard");
-        profile3.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile3.setUser(user3);
         profileRepository.save(profile3);
 
@@ -110,7 +105,6 @@ public class ApplicationStartUpRunner implements CommandLineRunner{
         profile4.setLastName("curlante");
         profile4.setUsername(user4.getUsername());
         profile4.setBio("I'm a UX DESIGNER");
-        profile4.setBirthday(LocalDateTime.of(1956, 10, 10, 0, 0));
         profile4.setUser(user4);
         profileRepository.save(profile4);
 
